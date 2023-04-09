@@ -8,7 +8,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "format": "prettier -w src/**/*.{ts,vue}",
-    "lint": "eslint --fix src/**/*.{ts,vue}",
+    "lint": "eslint . --ext .vue,.ts --fix --ignore-path .gitignore",
     "fix": "pnpm format && pnpm lint"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
+    "@types/node": "^18.15.11",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-airbnb-with-typescript": "^7.0.0",
     "eslint": "^8.38.0",
