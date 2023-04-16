@@ -1,30 +1,42 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue';
+import { createId } from '@paralleldrive/cuid2';
+import { ref } from 'vue';
+
+const todos = ref([
+  { id: createId(), title: '犬の散歩', done: false },
+  { id: createId(), title: '本を読む', done: false },
+]);
+
+const newTodo = ref('');
+
+const addTodo = () => {
+  if (newTodo.value === '') return;
+  todos.value.push({
+    id: createId(),
+    title: newTodo.value,
+    done: false,
+  });
+  newTodo.value = '';
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank" rel="noopener noreferrer">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="p-4">
+    <h1 class="text-3xl mb-8">Todo List</h1>
+    <div class="flex flex-col gap-3 mb-5">
+      <label
+        v-for="todo in todos"
+        :key="todo.id"
+        :for="todo.id"
+        class="flex items-center gap-2 cursor-pointer"
+      >
+        <input type="checkbox" :id="todo.id" v-model="todo.done" />
+        <p :class="todo.done ? 'line-through' : ''">{{ todo.title }}</p>
+      </label>
+    </div>
+    <div>
+      <label><input type="text" v-model="newTodo" /></label>
+      <button type="button" @click="addTodo">追加</button>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

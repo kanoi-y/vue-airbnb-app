@@ -12,6 +12,7 @@
     "fix": "pnpm format && pnpm lint"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {
